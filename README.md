@@ -1,16 +1,6 @@
-# 16-762: Mobile Manipulation (Spring 2024)
+# 16-762: Mobile Manipulation (Spring 2026)
 
 ## Course Info
-
-#### [Syllabus](https://docs.google.com/document/d/1kWtvakADIGxY1ZWRYh876Qx_CZqxNd2QK4lL86yxwtc/edit?usp=sharing)  
-
-#### [Course Project Statement](https://docs.google.com/document/d/1-YopWf3rgZIXj8K8etmIaN4xQxTrqCX0CE65OgAPw54/edit?usp=sharing)  
-
-#### [Midterm Presentation Grading Rubric](https://docs.google.com/document/d/1Fcd_MO8JpOwfO06iXpZKfY0ATKlladNyrJNt1d8xx5M/edit?usp=sharing)  
-
-#### [Final Presentation Grading Rubric](https://docs.google.com/document/d/1si1jkm06OM3fBmYhkAvitWLPYM2dsrDyS1M7KM-YloY/edit?usp=sharing)  
-
-#### [Final Report Grading Rubric](https://docs.google.com/document/d/1sPBoVYKR543XYfci39k4LwDjfXUWVVxVyaOIcgP0gNs/edit?usp=sharing)  
 
 
 **Time**: Monday & Wednesday 3:30 - 4:50 PM  
@@ -23,23 +13,14 @@
 
 ## Course Description
 
-In this project-based course, you'll learn about mobile manipulation through hands-on experience working with real mobile manipulators. You'll gain experience with teleoperation, autonomy, perception, navigation, manipulation, and human-robot interaction, all within the context of mobile manipulators. You'll also learn about robot design, collaborative research, and applications for mobile manipulators.
+In this course, you'll learn about mobile manipulation through hands-on experience working with real mobile manipulators. You'll gain experience with teleoperation, autonomy, perception, navigation, manipulation, and human-robot interaction, all within the context of mobile manipulators.
 
-This is a graduate-level project-based course for students interested in mobile manipulation. There are no exams nor textbook assignments. You will be working with a group of your peers to develop solutions to real-world problems through the control of a mobile manipulator. There are two projects where you will work with **_real mobile manipulators_** and build on state-of-the-art methods from scientific literature, all leading to a video recording, live robot demonstration, presentation, and short paper to disseminate your results.
+This course is structured as a hands-on introduction to mobile manipulators. Lectures will provide base concepts on topics in mobile manipulation, followed by in-class lab-style implementations on real-world mobile manipulators. The course will culminate in a final project with a small team on a topic/problem of the students' choosing that connect many of the mobile manipulation techniques learned throughout the semester.
+
+The primary goal of this course is to provide you with a practical understanding of mobile manipulation in real contexts. Upon successful completion of this course, you should: 1) Have a practical understanding of perception, action, human-robot interaction, and robot learning for mobile manipulation. 2) Have hands-on experience in the design of mobile manipulation algorithms that operate in the real world. 3) Have a stronger grasp on the mobile manipulation research process, including defining goals, developing methodologies, and disseminating results. 4) Have familiarity with relevant literature and the state-of-the-art. 5) Have experience identifying problems and tasks that could benefit from mobile manipulation and developing robot manipulation methods that enable robots to perform these tasks.
+
 
 ### Pre-Requisites
-Prior experience with the Python programming language is encouraged and extremely beneficial. 
-
----
-
-## History and Example Projects
-
-This course has been developed and inspired based on a prior project-based course on mobile manipulation for robotic caregiving, taught at CMU and Georgia Tech.
-
-Examples of past mobile manipulation projects can be found on the following course webpage: [16-887: Robotic Caregivers and Intelligent Physical Collaboration (2023)](https://zackory.com/rc2023/)
-
-## Credit
-
-Earlier versions of this course were co-developed and co-instructed with [Prof. Charlie Kemp](https://charliekemp.com) at Georgia Tech. Early versions at Georgia Tech emphasized robotic caregiving through mobile manipulation: [Robotic Caregivers](https://sites.gatech.edu/robotic-caregivers/).
+Prior experience with the Python programming language is encouraged and beneficial. 
 
 ![RCICP](mm.jpg)
