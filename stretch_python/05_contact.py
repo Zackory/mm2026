@@ -2,7 +2,9 @@ import stretch_body.robot
 robot = stretch_body.robot.Robot()
 robot.startup()
 
-# robot.base.left_wheel.enable_guarded_mode() # Contact detection is disabled for base by default
+# Contact detection is disabled for base by default, because of many false positives
+# If you want to enable it, use these lines of code below.
+# robot.base.left_wheel.enable_guarded_mode()
 # robot.base.right_wheel.enable_guarded_mode()
 
 # Stops arm at 30% and lift at 50% max current detected (e.g. collides with a person)
