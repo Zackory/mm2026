@@ -13,7 +13,7 @@ input('Hit enter to runstop motion')
 robot.pimu.runstop_event_trigger() # pimu = Power+IMU
 robot.push_command()
 
-input('Hit enter to restart motion')    
+input('Hit enter to disable runstop')    
 robot.pimu.runstop_event_reset()
 robot.push_command()
 
