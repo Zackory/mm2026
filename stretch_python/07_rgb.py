@@ -1,17 +1,20 @@
-import rospy, sys, cv2
+import rclpy, cv2
+from rclpy.node import Node
 from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
-rospy.init_node('rgb')
-bridge = CvBridge()
+from cv_bridge import CvBridge
 
-def callback(msg):
-    try:
-        image = bridge.imgmsg_to_cv2(msg, 'bgr8')
+class ImageSubscriber(Node):
+    def __init__(self):
+        super().__init__('image_subscriber')
+        self.sub = self.create_subscription(Image, '/camera/color/image_raw', self.callback, 10)
+        self.bridge = CvBridge()
+
+    def callback(self, msg):
+        image = self.bridge.imgmsg_to_cv2(msg, 'bgr8')
         # Do something with your image
         cv2.imshow('image', image)
         cv2.waitKey(3)
-    except CvBridgeError as e:
-        rospy.logwarn('CV Bridge error: {0}'.format(e))
 
-sub = rospy.Subscriber('/camera/color/image_raw', Image, callback, queue_size=1)
-rospy.spin()
+rclpy.init()
+image_sub = ImageSubscriber()
+rclpy.spin(image_sub)
