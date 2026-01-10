@@ -1,13 +1,18 @@
-import rospy, sys
-import stretch_body.robot
+import rclpy, sys
+from rclpy.node import Node
 from speech_recognition_msgs.msg import SpeechRecognitionCandidates
-rospy.init_node('speech')
 
-def callback(msg):
-    transcript = ' '.join(map(str, msg.transcript))
-    print(transcript)
-    # Do something with the text
-    sys.exit(0)
+class SpeechSub(Node):
+    def __init__(self):
+        super().__init__('speech_sub')
+        self.sub = self.create_subscription(SpeechRecognitionCandidates, 'speech_to_text', self.callback, 10)
 
-sub = rospy.Subscriber('speech_to_text', SpeechRecognitionCandidates, callback)
-rospy.spin()
+    def callback(self, msg):
+        transcript = ' '.join(map(str, msg.transcript))
+        print(transcript)
+        # Do something with the text
+        sys.exit(0)
+
+rclpy.init()
+speech_sub = SpeechSub()
+rclpy.spin(speech_sub)
