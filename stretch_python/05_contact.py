@@ -8,7 +8,7 @@ robot.base.right_wheel.enable_guarded_mode()
 # Stops arm at 50% max current detected (e.g. collides with a person)
 robot.arm.move_to(0.5, contact_thresh_pos=30, contact_thresh_neg=-30)
 # Stop the base if it collides into a wall
-robot.base.move_by(0.5, contact_thresh_pos=50, contact_thresh_neg=-50)
+robot.base.move_by(0.5, contact_thresh=(50, -50))
 
 robot.push_command()
 robot.arm.wait_until_at_setpoint(timeout=5.0)
