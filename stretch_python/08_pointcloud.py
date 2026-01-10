@@ -1,30 +1,25 @@
-import rospy, tf, time
-import sensor_msgs.point_cloud2 as pc2
-from sensor_msgs.msg import PointCloud2, PointCloud
-from geometry_msgs.msg import Point32
-rospy.init_node('pc')
-listener = tf.TransformListener()
-listener.waitForTransform('base_link', 'camera_color_optical_frame', rospy.Time(), rospy.Duration(4.0))
-time.sleep(0.5)
+import rclpy, tf2_ros, tf2_sensor_msgs
+import numpy as np
+from rclpy.node import Node
+from sensor_msgs.msg import PointCloud2
+import sensor_msgs_py.point_cloud2 as pc2
 
-def callback(msg):
-    print('msg received')
-    temp_cloud = PointCloud()
-    temp_cloud.header = msg.header
-    print('starting')
-    for data in pc2.read_points(msg, skip_nans=True):
-        temp_cloud.points.append(Point32(data[0], data[1], data[2]))
-    print('done')
-    point_cloud = None
-    while point_cloud is None:
+class PCSubscriber(Node):
+    def __init__(self):
+        super().__init__('pointcloud_subscriber')
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+        self.sub = self.create_subscription(PointCloud2, '/camera/depth/color/points', self.callback, 10)
+
+    def callback(self, msg):
         try:
-            # Transform all points to have 3D positions relative to robot base link
-            point_cloud = listener.transformPointCloud('base_link', temp_cloud)
-        except (tf.LookupException, tf.ConnectivityException,tf.ExtrapolationException) as e:
-            print(e)
-            pass
-    # Do something with your point cloud
-    print(point_cloud)
+            transform = self.tf_buffer.lookup_transform('base_link', 'camera_color_optical_frame', rclpy.time.Time())
+            pc_transformed = tf2_sensor_msgs.do_transform_cloud(msg, transform)
+            pc_numpy = pc2.read_points_numpy(pc_transformed, field_names=('x', 'y', 'z'), skip_nans=True)
+            print('First 3 points:', pc_numpy[:3])
+        except tf2_ros.LookupException as e:
+            self.get_logger().info(f'Transform not ready: {e}')
 
-pointcloud2_sub = rospy.Subscriber('/camera/depth/color/points', PointCloud2, callback, queue_size=1)
-rospy.spin()
+rclpy.init()
+node = PCSubscriber()
+rclpy.spin(node)
