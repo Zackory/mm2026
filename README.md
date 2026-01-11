@@ -29,7 +29,7 @@ The primary goal of this course is to provide you with a practical understanding
 
 | Date | Topic | Notes |
 |---|---|---|
-| **Week 1** <br> Mon, <br> Jan 12 | Introduction | [Syllabus]() |
+| **Week 1** <br> Mon, <br> Jan 12 | Introduction | [Syllabus](https://docs.google.com/document/d/1_E8lSnOd0cc7FephW_P7Avvrv_3_730qaTn_0KEtIeI/edit?usp=sharing) |
 | **Week 1** <br> Wed, <br> Jan 14 | Getting Familiar with Controlling a Mobile Manipulator |  |
 | **Week 2** <br> Mon, <br> Jan 19 | No class; MLK Jr Day |  |
 | **Week 2** <br> Wed, <br> Jan 21 | Lab 1 | **Lab Assignment 1 released** |
