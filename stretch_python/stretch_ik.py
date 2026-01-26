@@ -8,13 +8,11 @@ import stretch_body.robot
 import importlib.resources as importlib_resources
 from IPython import display
 
-
-# NOTE before running: `python3 -m pip install ikpy graphviz urchin`
+# NOTE before running: `python3 -m pip install --upgrade ikpy graphviz urchin networkx`
 
 target_point = [-0.043, -0.441, 0.654]
 target_orientation = ikpy.utils.geometry.rpy_matrix(0.0, 0.0, -np.pi/2) # [roll, pitch, yaw]
 pretarget_orientation = ikpy.utils.geometry.rpy_matrix(0.0, 0.0, 0.0)
-
 
 # Setup the Python API
 robot = stretch_body.robot.Robot()
@@ -23,25 +21,14 @@ robot.startup()
 if not robot.is_calibrated():
     robot.home()
 
-pkg_path = str(importlib_resources.files("stretch_urdf"))
-model_name = 'SE3' # RE1V0, RE2V0, SE3
-tool_name = 'eoa_wrist_dw3_tool_sg3' # eoa_wrist_dw3_tool_sg3, tool_stretch_gripper, etc
-urdf_file_path = pkg_path + f"/{model_name}/stretch_description_{model_name}_{tool_name}.urdf"
-# mesh_files_directory_path = pkg_path + f"/{model_name}/meshes"
-# print(urdf_file_path)
-# exit()
+pkg_path = str(importlib_resources.files('stretch_urdf'))
+urdf_file_path = pkg_path + '/SE3/stretch_description_SE3_eoa_wrist_dw3_tool_sg3.urdf'
 
 # original_urdf = urdfpy.URDF.load(urdf_file_path)
 # print([joint.name for joint in original_urdf.joints], '\n')
 # print([link.name for link in original_urdf.links])
-# exit()
-
-# urdf_path = str((pathlib.Path(hu.get_fleet_directory()) / 'exported_urdf' / 'stretch.urdf').absolute())
 # tree = ikpy.urdf.utils.get_urdf_tree(urdf_file_path, "base_link")[0]
 # display.display_png(tree)
-# print(f"Your robot is equipped with the '{robot.end_of_arm.name}' end-effector")
-
-# print('Run: \'roslaunch stretch_description display.launch\' to see where the base_link coordinate frame is.')
 
 # Remove unnecessary links/joints
 original_urdf = urdfpy.URDF.load(urdf_file_path)
@@ -57,17 +44,17 @@ names_of_joints_to_remove = ['joint_right_wheel', 'joint_left_wheel', 'caster_jo
 joints_to_remove = [l for l in modified_urdf._joints if l.name in names_of_joints_to_remove]
 for jr in joints_to_remove:
     modified_urdf._joints.remove(jr)
-print(f"name: {modified_urdf.name}")
-print(f"num links: {len(modified_urdf.links)}")
-print(f"num joints: {len(modified_urdf.joints)}")
 
-print('Links:', modified_urdf.links)
-print('Joints:', modified_urdf.joints)
-new_urdf_path = "/tmp/iktutorial/stretch.urdf"
-modified_urdf.save(new_urdf_path)
-chain = ikpy.chain.Chain.from_urdf_file(new_urdf_path)
-for link in chain.links:
-    print(f"* Name: {link.name}, Type: {link.joint_type}")
+# print(f"name: {modified_urdf.name}")
+# print(f"num links: {len(modified_urdf.links)}")
+# print(f"num joints: {len(modified_urdf.joints)}")
+# print('Links:', modified_urdf.links)
+# print('Joints:', modified_urdf.joints)
+# new_urdf_path = "/tmp/iktutorial/stretch.urdf"
+# modified_urdf.save(new_urdf_path)
+# chain = ikpy.chain.Chain.from_urdf_file(new_urdf_path)
+# for link in chain.links:
+#     print(f"* Name: {link.name}, Type: {link.joint_type}")
 
 # Add virtual base joint
 joint_base_translation = urdfpy.Joint(name='joint_base_translation',
@@ -83,22 +70,13 @@ link_base_translation = urdfpy.Link(name='link_base_translation',
                                     visuals=None,
                                     collisions=None)
 modified_urdf._links.append(link_base_translation)
-
 # amend the chain
 for j in modified_urdf._joints:
     if j.name == 'joint_mast':
         j.parent = 'link_base_translation'
-print(f"name: {modified_urdf.name}")
-print(f"num links: {len(modified_urdf.links)}")
-print(f"num joints: {len(modified_urdf.joints)}")
 
 new_urdf_path = "/tmp/iktutorial/stretch.urdf"
 modified_urdf.save(new_urdf_path)
-
-# tree = ikpy.urdf.utils.get_urdf_tree(iktuturdf_path, "base_link")[0]
-# print(tree)
-# print(ikpy.urdf.utils.get_urdf_tree(iktuturdf_path, "base_link")[1])
-# tree.view()
 
 chain = ikpy.chain.Chain.from_urdf_file(new_urdf_path)
 
