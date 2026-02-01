@@ -1,12 +1,9 @@
 import ikpy.urdf.utils
-import pathlib
-import stretch_body.hello_utils as hu
 import urchin as urdfpy
 import numpy as np
 import ikpy.chain
 import stretch_body.robot
 import importlib.resources as importlib_resources
-from IPython import display
 
 # NOTE before running: `python3 -m pip install --upgrade ikpy graphviz urchin networkx`
 
