@@ -9,7 +9,6 @@ import importlib.resources as importlib_resources
 
 target_point = [-0.043, -0.441, 0.654]
 target_orientation = ikpy.utils.geometry.rpy_matrix(0.0, 0.0, -np.pi/2) # [roll, pitch, yaw]
-pretarget_orientation = ikpy.utils.geometry.rpy_matrix(0.0, 0.0, 0.0)
 
 # Setup the Python API
 robot = stretch_body.robot.Robot()
@@ -20,12 +19,6 @@ if not robot.is_calibrated():
 
 pkg_path = str(importlib_resources.files('stretch_urdf'))
 urdf_file_path = pkg_path + '/SE3/stretch_description_SE3_eoa_wrist_dw3_tool_sg3.urdf'
-
-# original_urdf = urdfpy.URDF.load(urdf_file_path)
-# print([joint.name for joint in original_urdf.joints], '\n')
-# print([link.name for link in original_urdf.links])
-# tree = ikpy.urdf.utils.get_urdf_tree(urdf_file_path, "base_link")[0]
-# display.display_png(tree)
 
 # Remove unnecessary links/joints
 original_urdf = urdfpy.URDF.load(urdf_file_path)
@@ -41,17 +34,6 @@ names_of_joints_to_remove = ['joint_right_wheel', 'joint_left_wheel', 'caster_jo
 joints_to_remove = [l for l in modified_urdf._joints if l.name in names_of_joints_to_remove]
 for jr in joints_to_remove:
     modified_urdf._joints.remove(jr)
-
-# print(f"name: {modified_urdf.name}")
-# print(f"num links: {len(modified_urdf.links)}")
-# print(f"num joints: {len(modified_urdf.joints)}")
-# print('Links:', modified_urdf.links)
-# print('Joints:', modified_urdf.joints)
-# new_urdf_path = "/tmp/iktutorial/stretch.urdf"
-# modified_urdf.save(new_urdf_path)
-# chain = ikpy.chain.Chain.from_urdf_file(new_urdf_path)
-# for link in chain.links:
-#     print(f"* Name: {link.name}, Type: {link.joint_type}")
 
 # Add virtual base joint
 joint_base_translation = urdfpy.Joint(name='joint_base_translation',
@@ -110,10 +92,8 @@ def move_to_configuration(q):
     robot.end_of_arm.move_to('wrist_roll', q_roll)
     robot.push_command()
 
-def move_to_grasp_goal(target_point, target_orientation, pretarget_orientation=None):
+def move_to_grasp_goal(target_point, target_orientation):
     q_init = get_current_configuration()
-    if pretarget_orientation is not None:
-        q_init = chain.inverse_kinematics(target_point, pretarget_orientation, orientation_mode='all', initial_position=q_init)
     q_soln = chain.inverse_kinematics(target_point, target_orientation, orientation_mode='all', initial_position=q_init)
     print('Solution:', q_soln)
 
@@ -130,5 +110,5 @@ def get_current_grasp_pose():
 
 
 # robot.stow()
-move_to_grasp_goal(target_point, target_orientation, pretarget_orientation)
+move_to_grasp_goal(target_point, target_orientation)
 print(get_current_grasp_pose())
