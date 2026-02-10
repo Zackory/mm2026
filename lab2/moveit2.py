@@ -23,7 +23,12 @@ class MoveMe(HelloNode):
             goal_state = RobotState(moveit.get_robot_model())
           
             # Ordering: [x, y, theta, lift, arm/4, arm/4, arm/4, arm/4, yaw, pitch, roll]
-            goal_state.set_joint_group_positions(planning_group, [0.3, 0.0, 0.0, self.get_joint_pos('joint_lift'), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+            goal_state.set_joint_group_positions(planning_group, 
+                [0.3, 0.0, 0.0, 
+                self.get_joint_pos('joint_lift'), self.get_joint_pos('joint_arm_l3'), 
+                self.get_joint_pos('joint_arm_l2'), self.get_joint_pos('joint_arm_l1'), self.get_joint_pos('joint_arm_l0'), 
+                self.get_joint_pos('joint_wrist_yaw'), self.get_joint_pos('joint_wrist_pitch'), self.get_joint_pos('joint_wrist_roll')]
+            )
             # TODO: Your code will likely go here. Note that I gave you a for loop already, which you can edit and use.
 
             moveit_plan.set_start_state_to_current_state()
