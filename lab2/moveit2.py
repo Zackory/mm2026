@@ -36,6 +36,7 @@ class MoveMe(HelloNode):
             # NOTE: You should delete the above example and replace it with your own goal states.
             
             # TODO: Your code will likely go here. Note that I gave you a for loop already, which you can edit and use.
+            # For base motion (x, y, theta) each goal state should be defined according to the robot's current position (or its previous goal).
 
             moveit_plan.set_start_state_to_current_state()
             moveit_plan.set_goal_state(robot_state=goal_state)
