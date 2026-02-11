@@ -21,14 +21,20 @@ class MoveMe(HelloNode):
         for i in range(1):
             print(f'--- Planning Step {i} ---')
             goal_state = RobotState(moveit.get_robot_model())
-          
+
+            # Example goal state: demonstrates commanding the robot to move forward by 0.3 meters
+            # We pass in the current joint position as the goal for each joint in the arm + wrist since we don't want them to move
             # Ordering: [x, y, theta, lift, arm/4, arm/4, arm/4, arm/4, yaw, pitch, roll]
+            # For driving the base: the positive x-axis is pointing out of the front of the robot (the flat side of the base). 
+            # Positive y-axis is on the left of the robot (opposite direction the arm is facing).
             goal_state.set_joint_group_positions(planning_group, 
                 [0.3, 0.0, 0.0, 
                 self.get_joint_pos('joint_lift'), self.get_joint_pos('joint_arm_l3'), 
                 self.get_joint_pos('joint_arm_l2'), self.get_joint_pos('joint_arm_l1'), self.get_joint_pos('joint_arm_l0'), 
                 self.get_joint_pos('joint_wrist_yaw'), self.get_joint_pos('joint_wrist_pitch'), self.get_joint_pos('joint_wrist_roll')]
             )
+            # NOTE: You should delete the above example and replace it with your own goal states.
+            
             # TODO: Your code will likely go here. Note that I gave you a for loop already, which you can edit and use.
 
             moveit_plan.set_start_state_to_current_state()
