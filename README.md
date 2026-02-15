@@ -39,7 +39,7 @@ The primary goal of this course is to provide you with a practical understanding
 | **Week 4** <br> Wed, <br> Feb 4 | Lab 2 | **Deadline: Lab 1** <br> **Lab Assignment 2 released** |
 | **Week 5** <br> Mon, <br> Feb 9 | Perception for Manipulation |  |
 | **Week 5** <br> Wed, <br> Feb 11 | Lab 2 continued |  |
-| **Week 6** <br> Mon, <br> Feb 16 | Visual Servoing and Grasping Mechanics |  |
+| **Week 6** <br> Mon, <br> Feb 16 | Visual Servoing |  |
 | **Week 6** <br> Wed, <br> Feb 18 | Lab 3 | **Deadline: Lab 2** <br> **Lab Assignment 3 released** |
 | **Week 7** <br> Mon, <br> Feb 23 | Mobile Navigation and Localization |  |
 | **Week 7** <br> Wed, <br> Feb 25 | Lab 3 continued |  |
