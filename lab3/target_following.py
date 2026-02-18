@@ -134,10 +134,9 @@ class IKTargetFollowing(HelloNode):
         # TODO: ------------- start --------------
         # fill with your response
         #   create a tf2 buffer and listener
+        #   create a subscriber to the goal pose published by your object detector
         # TODO: -------------- end ---------------
-        self.tf_buffer = tf2_ros.Buffer()
-        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
-        self.goal_sub = self.create_subscription(PoseStamped, '/object_detector/goal_pose', self.goal_callback, 10)
+
 
 
 
