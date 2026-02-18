@@ -9,7 +9,7 @@ import threading
 import tf2_ros
 from tf2_geometry_msgs import TransformStamped
 from sensor_msgs.msg import JointState
-import ik_utils
+import ik_ros_utils as ik
 import ikpy
 
 # Make sure to run:
@@ -66,8 +66,8 @@ class IKTargetFollowing(HelloNode):
             goal_transformed = self.get_goal_pose_in_base_frame(goal_msg)
             gripper_transformed = self.get_gripper_pose_in_base_frame()
 
-            goal_pos = ik_utils.get_xyz_from_msg(goal_transformed)
-            gripper_pos = ik_utils.get_xyz_from_msg(gripper_transformed)
+            goal_pos = ik.get_xyz_from_msg(goal_transformed)
+            gripper_pos = ik.get_xyz_from_msg(gripper_transformed)
         except:
             print("Error getting transforms")
             return
@@ -76,7 +76,7 @@ class IKTargetFollowing(HelloNode):
 
         # TODO: ------------- start --------------
         # fill with your response
-        #   use the same functions you used for IK in Lab 2, provided for you now in `ik_utils.py`, 
+        #   use the same functions you used for IK in Lab 2, now in `ik_ros_utils.py`, 
         #   to move the robot to the transformed goal point.
         q_soln = None
         # TODO: -------------- end ---------------
@@ -87,12 +87,12 @@ class IKTargetFollowing(HelloNode):
         #   there is a valid solution without excessive base movement
         # you can also set your own triggers manually (keep delta large but use an if/else on move_to_pose()
         #   so the base only moves above a certain distance threshold
-        # you can also try adjusting joint limits of the base trans/rot in `ik_utils.py` to be much smaller
+        # you can also try adjusting joint limits of the base trans/rot in `ik_ros_utils.py` to be much smaller
         # one or some combination of these should help!
 
-        ik_utils.print_q(q_soln)
+        ik.print_q(q_soln)
         if q_soln is not None:
-            ik_utils.move_to_configuration(self, q_soln)
+            ik.move_to_configuration(self, q_soln)
 
     def compute_waypoint_to_goal(self, goal_pos, gripper_pos):
 
@@ -116,9 +116,9 @@ class IKTargetFollowing(HelloNode):
     def move_to_ready_pose(self):
         # TODO: minor - uncomment the correct ready pose for part 1 or 2!
         #   part 1: 
-        self.move_to_pose(ik_utils.READY_POSE_P1, blocking=True)
+        self.move_to_pose(ik.READY_POSE_P1, blocking=True)
         #   part 2: READY_POSE_P2
-        # self.move_to_pose(ik_utils.READY_POSE_P2, blocking=True)
+        # self.move_to_pose(ik.READY_POSE_P2, blocking=True)
 
     def main(self):
         HelloNode.main(self, 'follow_target', 'follow_target', wait_for_first_pointcloud=False)
