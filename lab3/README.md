@@ -50,14 +50,14 @@ Among one of those helper functions is a visualization tool (using cv2, mentione
 
 ### `target_following.py`
 
-1. TODO: Run the code once before making any changes. The robot should stow itself, then move to its ready configuration, which is designed such that: the lift is up at ~table height, wrist yaw is in line with the base, pitch is slightly downward, gripper is open. Adjust initial lift height and pitch as needed for your workspace (`READY_POSE_P1` found in `ik_utils.py`).
+1. TODO: Run the code once before making any changes. The robot should stow itself, then move to its ready configuration, which is designed such that: the lift is up at ~table height, wrist yaw is in line with the base, pitch is slightly downward, gripper is open. Adjust initial lift height and pitch as needed for your workspace (`READY_POSE_P1` found in `ik_ros_utils.py`).
 2. (Provided) Creates a joint state callback that unpacks joint state messages for what works with/is expected by ikpy
 3. TODO: subscribe to the `object_detector/goal_pose` topic in `self.main()`, published by your object detection node, to find the target pose the robot should move to.
 4. TODO: Also create a TF buffer and listener in `self.main()`
 5. TODO: Transform the goal pose to the same coordinate system as the robot's base
 6. TODO: Transform the gripper pose to the same coordinate system as the robot's base
 7. TODO: If the goal is too far to move to before the next goal is posted (~2Hz), compute a waypoint some delta away from the current gripper position to make progress to the goal
-8: TODO: Use the same functions you used for IK in Lab 2, provided for you now in `ik_utils.py`, to move the robot to the waypoint.
+8: TODO: Use the same functions you used for IK in Lab 2, provided for you now in `ik_ros_utils.py`, to move the robot to the waypoint.
 
 When both nodes are working, you should take a video of the robot following the object to 3 different positions of the object. The robot's base should have to move to track the object to at least one of those poses.
 
@@ -76,7 +76,7 @@ This part of the lab depends heavily on the previous part and involves editing t
 
 ### `target_following.py` --> copy and rename `grasp_objects.py`
 
-1. Change the ready pose by uncommenting the line for part 2. Run the code once before making any further changes. The robot should stow itself, then move to its ready configuration, which is designed such that: the lift is up at ~table height, wrist yaw is normal to the base, pitch is slightly downward, gripper is open, and head is looking down the arm. Adjust initial lift height and pitch as needed for your workspace (`READY_POSE_P1` found in `ik_utils.py`).
+1. Change the ready pose by uncommenting the line for part 2. Run the code once before making any further changes. The robot should stow itself, then move to its ready configuration, which is designed such that: the lift is up at ~table height, wrist yaw is normal to the base, pitch is slightly downward, gripper is open, and head is looking down the arm. Adjust initial lift height and pitch as needed for your workspace (`READY_POSE_P1` found in `ik_ros_utils.py`).
 2. TODO: Edit the code to move to and grasp a object (instead of continuously following it). You should be able to pick up a given object and retract the arm to bring it closer to the base. 
 3. TODO: Rerun for all the objects.
 
