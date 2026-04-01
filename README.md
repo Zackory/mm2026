@@ -53,7 +53,7 @@ The primary goal of this course is to provide you with a practical understanding
 | **Week 11** <br> Wed, <br> Mar 25 | Lab 5 | **Deadline: Lab 4** <br> **Lab Assignment 5 released** |
 | **Week 12** <br> Mon, <br> Mar 30 | Force Control |  |
 | **Week 12** <br> Wed, <br> Apr 1 | Lab 5 continued |  |
-| **Week 13** <br> Mon, <br> Apr 6 | Compliance and Contact-Rich Manipulation |  |
+| **Week 13** <br> Mon, <br> Apr 6 | Mobile Manipulator Design |  |
 | **Week 13** <br> Wed, <br> Apr 8 | Open Lab for Final Projects | **Deadline: Lab 5** |
 | **Week 14** <br> Mon, <br> Apr 13 | Frontiers in Mobile Manipulation |  |
 | **Week 14** <br> Wed, <br> Apr 15 | Open Lab for Final Projects | **Deadline (Apr 18): Google Slides for <br> your project presentation** |
